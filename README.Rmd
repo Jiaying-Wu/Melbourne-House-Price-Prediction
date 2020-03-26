@@ -1,0 +1,19 @@
+---
+output: github_document
+---
+
+```{r setup, include = FALSE}
+# The README markdown generate by this rmd file, please edit the content within this R markdown.
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  message = FALSE,
+  #fig.path = "images/",
+  #fig.align="center",
+  echo = FALSE
+)
+```
+
+# Melbourne House Price Prediction
+
+The data source of this project can found in competition [`vitticeps`](https://www.kaggle.com/c/vitticeps) in Kaggle.
