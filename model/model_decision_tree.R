@@ -22,6 +22,7 @@ model_dt$variable.importance
 
 # Evaluate the MAE with train_15 set
 MAE(predict(model_dt, train_15), train_15$price)
+#MAE is 1.216002
 
 # Predict test set
 test_np <- read_csv("data/test_noprice.csv")
