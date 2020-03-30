@@ -20,6 +20,8 @@ model_dt <- rpart(price~., data = train_85, control = rpart.control(cp = 0.00000
 tail(model_dt$cptable)
 model_dt$variable.importance
 
+saveRDS(model_dt, "model/saved_model/dt_base.RDS")
+
 # Evaluate the MAE with train_15 set
 MAE(predict(model_dt, train_15), train_15$price)
 #MAE is 1.216002
