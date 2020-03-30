@@ -16,7 +16,7 @@ In this competition I tried 3 tree-base models:
 
 #### Decision Tree
 
-The first type of model we builded is Decision Tree using the package `rpart`.
+The first type of model we build is Decision Tree, using the package `rpart`.
 
 Source code `model_decision_tree.R` under `model` folder.
 
@@ -46,11 +46,11 @@ The result of this decision tree model suggested variables `house_size`, `id` an
 
     ## [1] 1.216002
 
-The Mean Absoult Error (MAE) of the local test set is `1.216002`, it estimated the average error in out of sample prediction for Melboure house price is `AUD121,600.2`
+The Mean Absolute Error (MAE) of the local test set is `1.216002`, it estimated the average error in out of sample prediction for Melbourne house price is `AUD121,600.2`
 
 #### Random Forest
 
-The second type of model we builded is Random Forest using the package `randomForest` and parameters tunning using package `caret`.
+The second type of model we build is Random Forest, using the package `randomForest` and parameters tunning using package `caret`.
 
 Source code `model_random_forest.R` under `model` folder.
 
@@ -60,9 +60,9 @@ First we tuned the `mtry` between 1 to 13 base on 500 trees, with 5-fold cross v
 
 The MAE of each parameter is:
 
-<img src="plot/plot_rf_grid_mtry.png" style="width:55.0%" style="height:20.0%" />
+![](plot/plot_rf_grid_mtry.png)
 
-It suggested the optimise `mtry` base on 500 tree is 13
+It suggested the optimize `mtry` base on 500 tree is 13
 
 Then we tuned the parameter `ntree` base on `mtry = 13` on this sequence of tree: `500, 1000, 1500, 2000, 3000`, with 5-fold cross validation and repeat 2 times.. `ntree` is the number of trees to grow.
 
@@ -89,14 +89,74 @@ The summary of the tunning result is:
 
 Base on the median MAE and mean MAE, it suggested `ntree = 2000`
 
-Base on grid search, the optimised parameters for fitting random forest model in this dataset is `mtry = 13, ntree = 2000`.
+Base on grid search, the optimized parameters for fitting random forest model in this dataset is `mtry = 13, ntree = 2000`.
 
-The variable imporatance plot base on the optimise Random Forest model is:
+The variable importance plot base on the optimize Random Forest model is:
 
 ![](plot/optimise_rf_var_imp.png)
 
-It suggested the top affecting 3 factors for melbourne house price in this model is `house_size`, `id`, `ncars`.
+It suggested the top affecting 3 factors for Melbourne house price in this model is `house_size`, `id`, `ncars`.
 
-The Mean Absoult Error (MAE) of the local test set is `1.334874`, it estimated the average error in out of sample prediction for Melboure house price is `AUD133,487.4`.
+The Mean Absolute Error (MAE) of the local test set is `1.334874`, it estimated the average error in out of sample prediction for Melbourne house price is `AUD133,487.4`.
 
 #### Gradient Boosting
+
+The third type of model we build is Gradient Boosting, using the package `gbm`. We build two model with two different distribution `gaussian` and `laplace`.
+
+Source code `model_gbm.R` under `model` folder.
+
+The reason we choose this two distribution was the distribution of Melbourne house price has a first increasing exponential then decreasing exponential, share the same property of laplace distribution. The house price after taking the log follow the gaussian distribution.
+
+<img src="plot/price_distribution-1.png" style="display: block; margin: auto;" />
+
+##### Gradient Boosting with gaussian distribution
+
+We train this Gradient Boosting model with the following parameters:
+
+    gbm_gaussian <- gbm(log_price~.-price, 
+                     data = train_85,
+                     distribution = "gaussian",
+                     n.trees = 1000,
+                     shrinkage=0.01,
+                     interaction.depth = 20,
+                     n.minobsinnode = 30,
+                     bag.fraction = 0.8,
+                     train.fraction = 0.8,
+                     cv.folds = 4,
+                     n.cores = 4)
+
+Choosing the number of trees base on cross validation, it was 752.
+
+![](plot/gbm_gaussian_cv_tree.png)
+
+The feature important plot suggested `id` is the most important variable.
+
+![](plot/gbm_gaussian_cv_important.png)
+
+The Mean Absolute Error (MAE) of the local test set is `1.413301`, it estimated the average error in out of sample prediction for Melbourne house price is `AUD141,330.1`.
+
+##### Gradient Boosting with laplace distribution
+
+We train this Gradient Boosting model with the following parameters:
+
+    gbm_laplace <- gbm(price~.-log_price, 
+                        data = train_85,
+                        distribution = "laplace",
+                        n.trees = 1000,
+                        shrinkage = 0.028,
+                        interaction.depth = 21,
+                        n.minobsinnode = 30,
+                        bag.fraction = 0.8,
+                        train.fraction = 0.8,
+                        cv.folds = 4,
+                        n.cores = 4)
+
+Choosing the number of trees base on cross validation, it was 990.
+
+![](plot/gbm_laplace_cv_tree.png)
+
+The feature important plot suggested `suburb` is the most important variable.
+
+![](plot/gbm_laplace_cv_important.png)
+
+The Mean Absolute Error (MAE) of the local test set is `1.22285`, it estimated the average error in out of sample prediction for Melbourne house price is `AUD122,285`.

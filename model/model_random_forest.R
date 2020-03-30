@@ -51,7 +51,7 @@ plot_rf_grid_mtry <- rf_grid_mtry$results %>%
   geom_hline(yintercept = min(rf_grid_mtry$results$MAE), color = "red", linetype="dotted")+
   ggtitle("Grid Search of mtry parameter for Random Forest")
 
-ggsave(filename = "plot/plot_rf_grid_mtry.png", plot = plot_rf_grid_mtry)
+ggsave(filename = "plot/plot_rf_grid_mtry.png", plot = plot_rf_grid_mtry, width = 6, height = 3, units = "in")
 
 #save the model
 saveRDS(rf_grid_mtry, "model/saved_model/rf_grid_mtry.RDS")
