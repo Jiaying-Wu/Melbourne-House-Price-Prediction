@@ -2,7 +2,12 @@
 Melbourne House Price Prediction - Report
 =========================================
 
-### Data
+### Data Files
+
+-   [`README.Rmd`](https://github.com/Jiaying-Wu/Melbourne-House-Price-Prediction/blob/master/report/README.Rmd): R markdown to generate this data insight of Melbourne house price data.
+
+Report
+------
 
 In this project we have `37,747` sale records with `14` features in training set, our goal is to develop a tool to predict the house price for `37,620` sale records in test set.
 

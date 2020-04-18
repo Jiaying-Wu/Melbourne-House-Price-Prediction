@@ -26,7 +26,11 @@ library(brotools)
 
 # Melbourne House Price Prediction - Report
 
-### Data
+### Data Files
+
+* [`README.Rmd`](https://github.com/Jiaying-Wu/Melbourne-House-Price-Prediction/blob/master/report/README.Rmd): R markdown to generate this data insight of Melbourne house price data.
+
+## Report
 
 ```{r data}
 train <- read_csv("../data/train.csv")

@@ -1,8 +1,17 @@
 
-Melbourne House Price Prediction - Modeling
-===========================================
+Melbourne House Price Prediction - Data Modeling
+================================================
 
-### Model
+### Data Files
+
+-   [`model_decision_tree.R`](https://github.com/Jiaying-Wu/Melbourne-House-Price-Prediction/blob/master/model/model_decision_tree.R): R Script of Decision Tree Model.
+
+-   [`model_random_forest.R`](https://github.com/Jiaying-Wu/Melbourne-House-Price-Prediction/blob/master/model/model_random_forest.R): R Script of Random Forest Model.
+
+-   [`model_gbm.R`](https://github.com/Jiaying-Wu/Melbourne-House-Price-Prediction/blob/master/model/model_gbm.R): R Script of Gradient Boosting Model.
+
+Data Modeling
+-------------
 
 In this competition, we focus on these 3 tree-base models:
 
