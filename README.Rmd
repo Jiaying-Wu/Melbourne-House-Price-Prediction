@@ -48,7 +48,7 @@ Under [`model`](https://github.com/Jiaying-Wu/Melbourne-House-Price-Prediction/t
 
 Further modeling detail under [model](https://github.com/Jiaying-Wu/Melbourne-House-Price-Prediction/tree/master/model) folder.
 
-### Source
+### Data Source
 
 Data source from Monash University, access the data from this competition [vitticeps](https://www.kaggle.com/c/vitticeps/data) in Kaggle.
 
